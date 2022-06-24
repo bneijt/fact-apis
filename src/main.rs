@@ -1,24 +1,35 @@
-#[macro_use] extern crate rocket;
+#[macro_use]
+extern crate rocket;
 
-use rocket::fs::{FileServer, relative};
-use std::path::{PathBuf, Path};
+use rand::seq::IteratorRandom; // 0.7.3
+use rocket::fs::{relative, FileServer};
+use rocket::serde::json::Json;
+use std::path::{Path, PathBuf};
+use std::{
+    fs::File,
+    io::{BufRead, BufReader},
+};
 
+fn random_line_from(file_with_lines: &PathBuf) -> Option<String> {
+    /// Return a random line from a given file in static
+    let path = Path::new(relative!("static")).join(file_with_lines);
+    let f = BufReader::new(File::open(path).unwrap());
 
-fn random_line_from(file_with_lines: &PathBuf) -> String {
-    let mut path = Path::new(relative!("static")).join(file_with_lines);
-    return String::from("hello")
+    let lines = f.lines().map(|l| l.expect("Couldn't read line"));
+
+    lines
+        .choose(&mut rand::thread_rng())
 }
 
 #[get("/cat")]
-fn cat() -> String {
-    return random_line_from(&PathBuf::from("cat_facts.txt"));
+fn cat() -> Option<Json<String>> {
+    random_line_from(&PathBuf::from("data/cat_facts.txt")).map(Json)
 }
 
 #[get("/dog")]
-fn dog() -> String{
-    return random_line_from(&PathBuf::from("dog_facts.txt"));
+fn dog() -> Option<Json<String>> {
+    random_line_from(&PathBuf::from("data/dog_facts.txt")).map(Json)
 }
-
 
 #[launch]
 fn rocket() -> _ {
