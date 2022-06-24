@@ -1,0 +1,3 @@
+dog has four legs
+dog has nose
+dog is interested in cat

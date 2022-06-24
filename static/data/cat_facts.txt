@@ -1,0 +1,3 @@
+cat has four legs
+cat has nose
+cat does not like dog
