@@ -1,1 +1,1 @@
-web: ROCKET_PORT=$PORT ROCKET_KEEP_ALIVE=0 ./target/release/fact-apis
+web: ROCKET_LOG_LEVEL=normal ROCKET_PORT=$PORT ROCKET_KEEP_ALIVE=0 ./target/release/fact-apis
