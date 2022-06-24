@@ -13,7 +13,6 @@ use std::{
 /// Return a random line from a given file in static
 fn random_line_from(file_with_lines: &PathBuf) -> Option<String> {
     let path = Path::new("static").join(file_with_lines);
-    warn!("{:?}", &path);
     let f = BufReader::new(File::open(path).unwrap());
 
     let lines = f.lines().map(|l| l.expect("Couldn't read line"));
@@ -35,5 +34,5 @@ fn dog() -> Option<Json<String>> {
 fn rocket() -> _ {
     rocket::build()
         .mount("/facts", routes![dog, cat])
-        .mount("/", FileServer::from("/app/static"))
+        .mount("/", FileServer::from("static"))
 }
