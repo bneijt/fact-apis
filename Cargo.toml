@@ -2,7 +2,6 @@
 name = "fact-apis"
 version = "0.1.0"
 edition = "2021"
-include = ["/static"]
 
 [dependencies]
 rand = "0.8.5"

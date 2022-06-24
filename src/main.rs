@@ -2,7 +2,7 @@
 extern crate rocket;
 
 use rand::seq::IteratorRandom; // 0.7.3
-use rocket::fs::{relative, FileServer};
+use rocket::fs::FileServer;
 use rocket::serde::json::Json;
 use std::path::{Path, PathBuf};
 use std::{
@@ -12,7 +12,7 @@ use std::{
 
 /// Return a random line from a given file in static
 fn random_line_from(file_with_lines: &PathBuf) -> Option<String> {
-    let path = Path::new(relative!("app/static")).join(file_with_lines);
+    let path = Path::new("static").join(file_with_lines);
     warn!("{:?}", &path);
     let f = BufReader::new(File::open(path).unwrap());
 
@@ -36,5 +36,5 @@ fn dog() -> Option<Json<String>> {
 fn rocket() -> _ {
     rocket::build()
         .mount("/facts", routes![dog, cat])
-        .mount("/", FileServer::from(relative!("static")))
+        .mount("/", FileServer::from("static"))
 }
