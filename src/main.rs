@@ -12,7 +12,7 @@ use std::{
 
 /// Return a random line from a given file in static
 fn random_line_from(file_with_lines: &PathBuf) -> Option<String> {
-    let path = Path::new(relative!("static")).join(file_with_lines);
+    let path = Path::new(relative!("app/static")).join(file_with_lines);
     warn!("{:?}", &path);
     let f = BufReader::new(File::open(path).unwrap());
 
