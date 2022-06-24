@@ -10,8 +10,8 @@ use std::{
     io::{BufRead, BufReader},
 };
 
+/// Return a random line from a given file in static
 fn random_line_from(file_with_lines: &PathBuf) -> Option<String> {
-    /// Return a random line from a given file in static
     let path = Path::new(relative!("static")).join(file_with_lines);
     let f = BufReader::new(File::open(path).unwrap());
 
