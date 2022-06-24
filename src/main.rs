@@ -35,5 +35,5 @@ fn dog() -> Option<Json<String>> {
 fn rocket() -> _ {
     rocket::build()
         .mount("/facts", routes![dog, cat])
-        .mount("/", FileServer::from("static"))
+        .mount("/", FileServer::from("/app/static"))
 }
