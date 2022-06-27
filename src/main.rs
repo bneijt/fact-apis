@@ -1,7 +1,7 @@
 #[macro_use]
 extern crate rocket;
 
-use rand::seq::IteratorRandom; // 0.7.3
+use rand::seq::IteratorRandom;
 use rocket::fs::FileServer;
 use rocket::serde::json::Json;
 use std::path::{Path, PathBuf};

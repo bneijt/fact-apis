@@ -9,4 +9,5 @@ Based on https://jamesinkala.com/blog/deploy-a-rust-website-on-heroku/
 Development
 =======
 
+    heroku login
     git push heroku main
